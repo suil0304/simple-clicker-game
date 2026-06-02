@@ -1,0 +1,16 @@
+.absolute-anchor {
+    position: relative;
+}
+
+.align-center-by-absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.align-center-child-by-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

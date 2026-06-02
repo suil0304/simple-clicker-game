@@ -1,0 +1,22 @@
+[
+    {
+        "item-key": "earn-money-upgrade",
+        "name": "클릭 당 골드 증가",
+        "description": "클릭 당 골드가 1G 증가합니다.",
+        "base-price": [10, 25, 50, 100, 150, 200, 300, 400, 500],
+        "mult-price": 1.1,
+        "base-value": [1],
+        "mult-value": 1,
+        "type-value": "stack"
+    },
+    {
+        "item-key": "earn-money-second-upgrade",
+        "name": "초 당 골드 증가",
+        "description": "초 당 골드가 1G 증가합니다.",
+        "base-price": [150],
+        "mult-price": 1.5,
+        "base-value": [1],
+        "mult-value": 1,
+        "type-value": "stack"
+    }
+]
