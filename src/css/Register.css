@@ -1,0 +1,75 @@
+/* #root가 Register를 그리고 있는 경우의 스타일. */
+#root:has(#register-box) {
+    /* 크기를 뷰포트 기준으로 꽉 채운 후 완전 가운데 정렬. */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+/* #register-box 팝업 스타일 정의. */
+#register-box {
+    width: 30%;
+    height: 30%;
+
+    padding: 50px 75px;
+
+    transform: translateY(-10%);
+
+    /* 모든 div(LogInLikeInput) 자식에 대하여 margin: 16px 0px 적용. */
+    & div {
+        margin: 16px 0px;
+    }
+
+    /* div(LogInLikeInput) 중 첫 번째 자식에 대하여 윗쪽 margin: 0px 적용. */
+    & div:first-child {
+        margin-top: 0px;
+    }
+
+    /* div(LogInLikeInput) 중 마지막 자식에 대하여 아래쪽 margin: 0px 적용. */
+    & div:last-child {
+        margin-bottom: 0px;
+    }
+}
+
+/* 회원가입 문구 스타일 조절. */
+#register-box > h1 {
+    text-align: center;
+    font-size: 19px;
+}
+
+/* LogInLikeInput을 담는 컨테이너. */
+#register-input-container {
+    /* 바로 밑 LogInLikeInput에 대하여 margin: 4px 0px 적용. */
+    & > .register-input {
+        margin: 4px 0px;
+    }
+
+    /* 바로 밑 자식 LogInLikeInput 중 첫 번째 자식에 대하여 윗쪽 margin: 0px 적용. */
+    & > .register-input:first-child {
+        margin-top: 0px;
+    }
+
+    /* 바로 밑 자식 LogInLikeInput 중 마지막 자식에 대하여 아래쪽 margin: 0px 적용. */
+    & > .register-input:last-child {
+        margin-bottom: 0px;
+    }
+}
+
+/* Register 중 버튼을 담는 컨테이너. */
+#register-button-container {
+    display: flex;
+    flex-direction: row;
+    /* 행 방향 기준 끝부터 배치. */
+    justify-content: end;
+    /* 행 방향 기준 위 아래 가운데 정렬. */
+    align-items: center;
+}
+
+#register-button-submit {
+    width: 125px;
+    height: 35px;
+}

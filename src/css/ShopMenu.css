@@ -1,0 +1,4 @@
+/* #menu-component의 .shop-menu 부분 스타일 재정의. */
+#menu-component.shop-menu {
+    width: 100vw;
+}

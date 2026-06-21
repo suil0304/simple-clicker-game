@@ -1,0 +1,49 @@
+/* ShopButton div 요소 스타일 정의. */
+#shop-button-component {
+    width: 40px;
+    height: 40px;
+
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.shop-button-bar {
+    background-color: black;
+
+    width: 40px;
+    height: 5px;
+
+    transition: all linear 0.2s;
+}
+
+/* 밑의 아이콘 -> 크기 100% + 트랜지션으로 부드러운 애니메이션 적용. */
+#shop-button-component > #shop-button-icon {
+    width: 100%;
+    height: 100%;
+
+    transition: all linear 0.2s;
+
+    user-select: none;
+}
+
+#shop-button-component > #shop-left-close-bar,
+#shop-button-component > #shop-right-close-bar {
+    opacity: 0;
+}
+
+/* 쌩 노가다. */
+/* 저게 잘 맞았습니다. */
+#shop-button-component.button-activated {
+    & > #shop-left-close-bar {
+        opacity: 1;
+        transform: translateY(500%) rotateZ(45deg);
+    }
+
+    & > #shop-right-close-bar {
+        opacity: 1;
+        transform: translateY(-500%) rotateZ(-45deg);
+    }
+
+    & > #shop-button-icon {
+        opacity: 0;
+    }
+} 

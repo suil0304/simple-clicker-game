@@ -1,0 +1,51 @@
+#button-container {
+    display: flex;
+    position: fixed;
+
+    flex-direction: column;
+
+    width: 60px;
+    height: fit-content;
+
+    background-color: rgba(0, 0, 0, 0);
+
+    top: 20px;
+    right: 0.25vw;
+
+    z-index: 2000;
+
+    & > div {
+        margin: 13px 0px;
+        transition: all ease-out 0.25s;
+    }
+    
+    & > :first-child {
+        margin-top: 0px;
+    }
+
+    & > :last-child {
+        margin-bottom: 0px;
+    }
+
+    &:has(*.button-activated) > div {
+        margin: 0px;
+    }
+
+    &:has(*.button-activated) > :not(.button-activated) {
+        pointer-events: none;
+
+        &:not(div.button-activated ~ div) {
+            height: 0px;
+            margin: 0px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-50px);
+        }
+    }
+
+    &:has(*.button-activated) > div.button-activated ~ div {
+        opacity: 0;
+        transform: translateX(150%);
+        visibility: hidden;
+    }
+}

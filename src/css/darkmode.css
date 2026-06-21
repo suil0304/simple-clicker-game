@@ -1,0 +1,17 @@
+body,
+body * {
+    background-color: white;
+    color: black;
+}
+
+body:has(.dark-mode) {
+    filter: invert(0.95);
+
+    &.no-dark-mode {
+        filter: invert(0.95);
+    }
+}
+
+#dark-mode-trigger {
+    display: none;
+}

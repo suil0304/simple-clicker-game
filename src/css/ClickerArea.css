@@ -1,10 +1,10 @@
-.clicker-area {
+#clicker-area {
     /* 영역 크기 지정(뷰포트 사이즈로) */
     width: 80vw;
     height: 90vh;
 
-    /* margin 지정(top: 10px, 양 옆은 가운데로 맞춤) */
-    margin-top: 25px;
+    /* margin 지정(top: 12px, 양 옆은 가운데로 맞춤) */
+    margin-top: 14px;
     margin-left: auto;
     margin-right: auto;
 
@@ -15,16 +15,25 @@
     box-sizing: border-box;
 }
 
-.clicker-area-text {
+#clicker-area-text {
     font-size: 22px;
     color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0);
     transition: all ease-in 0.05s;
 }
 
-.clicker-area:hover > .clicker-area-text {
+#clicker-area:hover > #clicker-area-text {
     font-size: 26px;
 }
 
-.clicker-area:active > .clicker-area-text {
+#clicker-area.is-active > #clicker-area-text {
+    font-size: 18px;
+}
+
+#clicker-area.is-active:hover > #clicker-area-text {
+    font-size: 22px;
+}
+
+#clicker-area:active > #clicker-area-text {
     font-size: 22px;
 }

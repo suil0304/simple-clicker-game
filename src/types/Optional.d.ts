@@ -1,3 +1,2 @@
-import type { Nullable } from "./Nullable";
-
-export type Optional<T> = Nullable<T> | undefined;
+// Optional을 명시적으로 하기 위해 정의한 타입.
+export type Optional<T> = T | undefined;

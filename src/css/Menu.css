@@ -1,0 +1,51 @@
+/* 기본 Menu 스타일 정의. */
+#menu-component {
+    /* 기본적으로 숨겨져 있음. */
+    visibility: hidden;
+    /* 부모 기준 고정 좌표. */
+    position: fixed;
+
+    /* 윗쪽으로 0px 고정 + 오른쪽으로 0px 고정 */
+    top: 0px;
+    right: 0px;
+
+    width: 290px;
+    height: 100vh;
+
+    /* x 방향으로는 숨기고 y 방향으로는 스크롤 바 적용. */
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background-color: white;
+
+    /* 기본적으로 메뉴는 오른쪽으로 나가있음. */
+    transform: translateX(100%);
+    transition: all ease-out 0.25s;
+
+    /* 바로 밑 모든 자식들의 윗쪽 margin: 0px 적용. */
+    & > * {
+        margin-top: 0px;
+    }
+
+    &.menu-appeared,
+    &.menu-normal {
+        visibility: visible;
+
+        transform: translateX(0%);
+    }
+
+    &.menu-disappeared {
+        visibility: visible;
+
+        transform: translateX(100%);
+    }
+}
+
+html,
+body {
+    &:has(.menu-component.menu-appeared),
+    &:has(.menu-component.menu-normal),
+    &:has(.menu-component.menu-disappeared) {
+        overflow-y: hidden;
+    }
+}

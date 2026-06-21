@@ -1,0 +1,31 @@
+.black-bg {
+    visibility: hidden;
+    position: fixed;
+
+    top: 0px;
+    left: 0px;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: black;
+    opacity: 0;
+
+    &.black-bg-appeared,
+    &.black-bg-normal {
+        visibility: visible;
+
+        opacity: 0.6;
+    }
+
+    &.black-bg-disappeared {
+        visibility: visible;
+
+        opacity: 0;
+    }
+}
+
+.black-bg-with-animation {
+    transition: all ease-out 0.25s;
+    
+}

@@ -1,0 +1,11 @@
+.hamburger-button-menu {
+    padding: 25px;
+
+    & p {
+        margin-bottom: 10px;
+    }
+
+    & .between{
+        border: 1px solid black;
+    }
+}

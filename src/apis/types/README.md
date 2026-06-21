@@ -1,0 +1,1 @@
+from [simple-clicker-game-backend](https://github.com/suil0304/simple-clicker-game-backend)

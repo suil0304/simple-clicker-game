@@ -1,0 +1,129 @@
+#user-page-area {
+    /* display: flex -> 가운데 정렬 등 배치 가능. */
+    display: flex;
+    /* 요소 배치 방향 -> 행 */
+    flex-direction: row; 
+    /* 행 방향으로 위 아래 가운데 정렬 */
+    align-items: center;
+
+    /* 넘치는 요소는 숨기기. */
+    overflow: hidden;
+
+    width: 100%;
+    height: 35%;
+
+    padding: 30px;
+}
+
+#user-page-profile-icon {
+    width: 200px;
+    height: 200px;
+
+    /* 둥그런 아이콘을 위해. */
+    border-radius: 100%;
+}
+
+/* nickname과 name(id)을 보관하는 컨테이너 스타일. */
+#user-page-main-container {
+    margin-left: 15px;
+
+    /* 아래 margin: 없음 */
+    & > #user-page-nickname,
+    & > #user-page-id {
+        margin-bottom: 0px;
+    }
+
+    /* 유저 id 윗 margin: 5px */
+    & > #user-page-id {
+        margin-top: 5px;
+    }
+}
+
+#user-page-nickname {
+    font-size: 32px;
+}
+
+#user-page-id {
+    font-size: 17px;
+}
+
+#user-page-button-container {
+    display: flex;
+    flex-direction: row;
+    /* 버튼은 행 방향의 마지막부터 배치되도록. */
+    justify-content: end;
+
+    margin-top: 8px;
+
+    padding: 0px 7px;
+
+    /* 버튼의 첫 자식이 아닌 경우 왼쪽 margin: 6px */
+    & > button:not(:first-child) {
+        margin-left: 6px;
+    }
+}
+
+/* UserPage 공통 버튼 스타일 */
+.user-page-button {
+    width: 120px;
+    height: 35px;
+
+    font-size: 14px;
+}
+
+/* ShortcurLine을 담는 컨테이너. */
+#user-page-shortcut-container {
+    margin-top: 22px;
+
+    /* 첫 번째 자식이 아닌 모든 a(ShortcutLine)의 실질적인 것을 차지하고 있는 .shortcut-line에 margin-top: 20px 적용. */
+    & a:not(:first-child) > .shortcut-line {
+        margin-top: 20px;
+    }
+}
+
+/* .shortcut-line 공통 스타일. */
+.shortcut-line {
+    display: flex;
+    flex-direction: row;
+    /* 행 방향으로 사이 사이 공간 주며 배치. */
+    justify-content: space-between;
+    align-items: center;
+
+    width: 97%;
+    height: 115px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 0px 28px;
+
+    /* button.css의 .active-scale-bump-button 애니매이션 사이즈 재정의. */
+    &.active-scale-bump-button:active:not(:disabled) {
+        transform: scale(1.03, 1.03);
+    }
+
+    & p {
+        font-size: 24px;
+    }
+
+    & > #shortcut-line-arrow-text {
+        margin-right: 9px;
+    }
+}
+
+/* img와 p 요소를 담는 컨테이너 */
+.shortcut-line-left {
+    display: flex;
+    flex-direction: row;
+    /* 행 방향으로 위 아래 가운데 정렬만. */
+    align-items: center;
+
+    & > img {
+        width: 65px;
+        height: 65px;    
+    }
+
+    & > p {
+        margin-left: 20px;
+    }
+}
