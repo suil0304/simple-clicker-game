@@ -3,7 +3,7 @@ import { UpgradeInfo as _UpgradeInfo } from "./UpgradeInfo";
 import { BuyUpgradeData as _BuyUpgradeData } from "./BuyUpgradeData";
 import { GuestUpgradeData as _GuestUpgradeData } from "./GuestUpgradeData";
 import { GuestBuyUpgradeData as _GuestBuyUpgradeData } from "./GuestBuyUpgradeData";
-import { UpgradeInfoWithGold as _UpgradeInfoWithGold } from "./UpgradeInfoWithGold";
+import { UpgradeInfoWithGold as _UpgradeInfoWithGold } from "./UpgradeInfoContainer";
 
 export declare type UpgradeKey = _UpgradeKey;
 export declare type UpgradeInfo = _UpgradeInfo;

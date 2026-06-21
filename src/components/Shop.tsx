@@ -162,7 +162,7 @@ function setShopItemLine(
             });
             const upgradeInfo = result.upgradeInfo;
 
-            statsContext[upgradeInfo.upgradeKey] += upgradeInfo.curValue;
+            statsContext[upgradeInfo.upgradeKey] = result.curStats;
             game.upgradeContext[`${upgradeInfo.upgradeKey}Level`] = upgradeInfo.level;
             statsContext.gold = result.curGold;
 

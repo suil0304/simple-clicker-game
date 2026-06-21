@@ -111,7 +111,6 @@ function useStats() {
             return;
         }
 
-        
         const valueArray = [
             _getGuestGold(),
             _getGuestGoldPerClick(),
