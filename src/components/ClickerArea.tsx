@@ -55,6 +55,8 @@ function useClickerArea() {
             add *= statsContext.criticalMult;
         }
 
+        console.log(add);
+
         let text = `+${Math.round(add)}G`;
         if(isCritical) {
             text += "(Critical!)";

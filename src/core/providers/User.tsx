@@ -31,6 +31,8 @@ export function User(props:PropsWithChildren):JSX.Element {
         setAll
     } = useUser();
 
+    // getter로 Ref를 참조하도록 하여 의존성 배열에 state를 넣지 않아도 되도록 하였습니다.
+    // setter로 RefObject<Nullable<string> | undefined>.current를 직접적으로 설정 가능하도록 합니다.
     const userContext:UserContext = useMemo(() => {
         return {
             get name() {
@@ -41,6 +43,8 @@ export function User(props:PropsWithChildren):JSX.Element {
             },
             set nickname(v) {
                 nicknameRef.current = v;
+                // 닉네임은 변경 즉시 update 요청을 보냅니다.
+                // Promise.catch로 에러를 잡는 처리만 정의합니다.
                 API.UsersAPI.update({ nickname: v }).catch(() => {
                     console.error("닉네임을 업데이트하지 못 했습니다.");
                 });
@@ -84,6 +88,7 @@ export function User(props:PropsWithChildren):JSX.Element {
         };
     }, []);
 
+    // UserContext 제공자에 userContext 제공.
     return (
         <UserContext.Provider value={userContext}>
             {props.children}
