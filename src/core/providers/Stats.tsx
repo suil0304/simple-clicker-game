@@ -11,6 +11,7 @@ const GUEST_GOLD_PER_SECOND_KEY = "goldPerSecond-guest";
 const GUEST_CRITICAL_MULT_KEY = "criticalMult-guest";
 const GUEST_CRITICAL_RATE_KEY = "criticalRate-guest";
 
+// StatsContext는 다음과 같아야 한다 제약하는 interface.
 export interface StatsContext extends RefreshableContext {
     gold:number;
     goldPerClick:number;
@@ -21,6 +22,7 @@ export interface StatsContext extends RefreshableContext {
 }
 const StatsContext = createContext<StatsContext | null>(null);
 
+// StatsContext 제공자.
 export function Stats(props:PropsWithChildren):JSX.Element {
     const {
         goldRef,
@@ -32,6 +34,7 @@ export function Stats(props:PropsWithChildren):JSX.Element {
         refresh
     } = useStats();
 
+    // StatsContext 제공자에 넣어 제공될 객체.
     const statsContext:StatsContext = useMemo(() => {
         return {
             get gold() {
@@ -81,6 +84,7 @@ export function Stats(props:PropsWithChildren):JSX.Element {
         };
     }, []);
 
+    // StatsContext 제공자에 statsContext 넣기.
     return (
         <StatsContext.Provider value={statsContext}>
             {props.children}
@@ -88,6 +92,7 @@ export function Stats(props:PropsWithChildren):JSX.Element {
     );
 }
 
+// 커스텀 훅.
 function useStats() {
     const goldRef = useRef<number>(0);
     const goldPerClickRef = useRef<number>(0);
@@ -97,6 +102,7 @@ function useStats() {
 
     const clickCountRef = useRef<number | undefined>(undefined);
 
+    // RefreshableContext interface 제약을 지키기 위해 구현하는 refresh 함수.
     const refresh = useCallback(async () => {
         if(isLogin()) {
             const result = await API.StatsAPI.getOne();
@@ -162,6 +168,7 @@ function useStats() {
     };
 }
 
+// StatsContext를 가져오는 커스텀 훅.
 export function useStatsContext():StatsContext {
     const statsContext = useContext(StatsContext);
     if(!statsContext) {
@@ -171,6 +178,7 @@ export function useStatsContext():StatsContext {
     return statsContext;
 }
 
+// Guest(미로그인 상태) 전용 localStorage 값 가져오기 함수.
 function _getGuestGold():number | null {
     const result = window.localStorage.getItem(GUEST_GOLD_KEY);
     return result ? Number(result) : null;

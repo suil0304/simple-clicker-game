@@ -2,18 +2,21 @@ import { createContext, useContext, useMemo, useRef, type JSX, type PropsWithChi
 import type { ClickData } from "../../apis/types/stats";
 import type { ResetableContext } from "../../types/ResetableContext";
 
+// DataContext는 다음과 같아야 한다는 제약 interface.
 export interface DataContext extends ResetableContext {
     totalClickAddGold:number;
     readonly clickDatas:ClickData[];
 }
 const DataContext = createContext<DataContext | null>(null);
 
+// DataContext 제공자.
 export function Data(props:PropsWithChildren):JSX.Element {
     const {
         totalClickAddGoldRef,
         clickDatasRef
     } = useData();
 
+    // DataContext 제공자에 넣어 제공될 객체.
     const dataContext:DataContext = useMemo(() => {
         return {
             get totalClickAddGold() {
@@ -32,6 +35,7 @@ export function Data(props:PropsWithChildren):JSX.Element {
         };
     }, []);
 
+    // DataContext 제공자에 dataContext 넣기.
     return (
         <DataContext.Provider value={dataContext}>
             {props.children}
@@ -39,6 +43,7 @@ export function Data(props:PropsWithChildren):JSX.Element {
     );
 }
 
+// 커스텀 훅 정의.
 function useData() {
     const totalClickAddGoldRef = useRef(0);
     const clickDatasRef = useRef<ClickData[]>([]);
@@ -49,6 +54,7 @@ function useData() {
     };
 }
 
+// DataContext를 가져오는 커스텀 훅.
 export function useDataContext():DataContext {
     const dataContext = useContext(DataContext);
     if(!dataContext) {

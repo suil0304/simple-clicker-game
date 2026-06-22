@@ -5,11 +5,13 @@ import { useAsyncEffect } from "../../hooks/useAsyncEffect";
 import { API } from "../../apis";
 import type { RefreshableContext } from "../../types";
 
+// SettingContext는 다음과 같아야 제약하는 interface.
 export interface SettingContext extends RefreshableContext {
     darkMode:boolean;
 }
 const SettingContext = createContext<SettingContext | null>(null);
 
+// SettingContext 제공자.
 export function Setting(props:PropsWithChildren):JSX.Element {
     const {
         darkMode,
@@ -17,6 +19,7 @@ export function Setting(props:PropsWithChildren):JSX.Element {
         refresh
     } = useSetting();
 
+    // SettingContext 제공자에 넣어 제공될 객체.
     const settingContext:SettingContext = useMemo(() => {
         return {
             get darkMode() {
@@ -42,9 +45,11 @@ export function Setting(props:PropsWithChildren):JSX.Element {
     );
 }
 
+// 커스텀 훅 정의.
 function useSetting() {
     const [darkMode, setDarkMode] = useState(() => _getDarkMode());
 
+    // RefreshableContext interface 제약을 지키기 위해 구현하는 refresh 함수.
     const refresh = useCallback(async () => {
         if(isLogin()) {
             const result = await API.SettingsAPI.getSetting("darkMode");
@@ -61,6 +66,7 @@ function useSetting() {
     };
 }
 
+// SettingContext를 가져오는 커스텀 훅.
 export function getSettingContext():SettingContext {
     const settingContext = useContext(SettingContext);
     if(!settingContext) {
@@ -70,6 +76,8 @@ export function getSettingContext():SettingContext {
     return settingContext;
 }
 
+// default값을 matchMedia 함수로 가져옵니다.
+// CSS.
 function _getDarkMode():boolean {
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }

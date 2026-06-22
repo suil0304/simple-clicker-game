@@ -4,6 +4,8 @@ import type { JwtContainer, RegisterOrLoginData } from "./types/auth";
 import { JWT_KEY } from "../core/providers/User";
 
 const PATH = "auth";
+// 서버 엔드 포인트 /auth에 대한 API 정의.
+// 당연하게도, 이 엔드 포인트에 대해 유저 인증은 필요하지 않습니다.
 export namespace AuthAPI {
     export type SuccessWithMessage = {
         success:boolean,

@@ -96,11 +96,13 @@ export function User(props:PropsWithChildren):JSX.Element {
     );
 }
 
+// 커스텀 훅 정의.
 function useUser() {
     const nameRef = useRef<string | undefined>(undefined);
     const nicknameRef = useRef<Nullable<string> | undefined>(undefined);
     const createdAtRef = useRef<Date | undefined>(undefined);
 
+    // setAll은 한 번의 비동기 호출로 RefObject를 채우기 위해 가져옵니다.
     const setAll = useCallback(_setAll.bind(null, nameRef, nicknameRef, createdAtRef), []);
     useAsyncEffect(setAll, [])
 
@@ -112,6 +114,7 @@ function useUser() {
     };
 }
 
+// UserContext를 가져오기 위한 커스텀 훅.
 export function useUserContext():UserContext {
     const userContext = useContext(UserContext);
     if(!userContext) {
@@ -121,19 +124,26 @@ export function useUserContext():UserContext {
     return userContext;
 }
 
+// 로그인 체크 함수.
+// 현재 구현 단계에서는 JWT이 localStorage에 저장되어 있는가만 합니다.
 export function isLogin():boolean {
     const jwtToken = getJwt();
     return jwtToken !== null && jwtToken !== "";
 }
 
+// JWT 가져오기.
 export function getJwt():string | null {
     return window.localStorage.getItem(JWT_KEY);
 }
 
+// JWT 지우기.
+// 전역으로 공유되기에는 위험한 함수이기 때문에 내보내지 않습니다.
+// -> local
 function removeJwt():void {
     window.localStorage.removeItem(JWT_KEY)
 }
 
+// 코드 중복을 위한 핸들러.
 async function _handleRegisterOrSomething(
     name:string,
     password:string,
@@ -154,6 +164,7 @@ async function _handleRegisterOrSomething(
     }
 }
 
+// setAll의 원형.
 async function _setAll(
     nameRef:React.RefObject<string | undefined>,
     nicknameRef:React.RefObject<Nullable<string> | undefined>,

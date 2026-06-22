@@ -10,6 +10,7 @@ const GUEST_GOLD_PER_SECOND_LEVEL_KEY = "goldPerSecondLevel-guest";
 const GUEST_CRITICAL_MULT_LEVEL_KEY = "criticalMultLevel-guest";
 const GUEST_CRITICAL_RATE_LEVEL_KEY = "criticalRateLevel-guest";
 
+// UpgradeContext는 다음과 같아야 한다 제약하는 interface.
 export interface UpgradeContext extends RefreshableContext {
     goldPerClickLevel:number;
     goldPerSecondLevel:number;
@@ -18,6 +19,7 @@ export interface UpgradeContext extends RefreshableContext {
 }
 const UpgradeContext = createContext<UpgradeContext | null>(null);
 
+// UpgradeContext 제공자.
 export function Upgrade(props:PropsWithChildren):JSX.Element {
     const {
         goldPerClickLevelRef,
@@ -27,6 +29,7 @@ export function Upgrade(props:PropsWithChildren):JSX.Element {
         refresh
     } = useUpgrade();
 
+    // value에 넣어 제공할 객체.
     const upgradeContext:UpgradeContext = useMemo(() => {
         return {
             get goldPerClickLevel() {
@@ -63,6 +66,7 @@ export function Upgrade(props:PropsWithChildren):JSX.Element {
         };
     }, []);
 
+    // UpgradeContext 제공자에 upgradeContext 넣기.
     return (
         <UpgradeContext.Provider value={upgradeContext}>
             {props.children}
@@ -70,12 +74,14 @@ export function Upgrade(props:PropsWithChildren):JSX.Element {
     );
 }
 
+// 커스텀 훅 정의.
 function useUpgrade() {
     const goldPerClickLevelRef = useRef(0);
     const goldPerSecondLevelRef = useRef(0);
     const criticalMultLevelRef = useRef(0);
     const criticalRateLevelRef = useRef(0);
 
+    // RefreshableContext interface 제약을 지키기 위해 구현하는 refresh 함수.
     const refresh = useCallback(async () => {
         if(isLogin()) {
             const result = await API.UpgradesAPI.getAll();
@@ -110,6 +116,7 @@ function useUpgrade() {
     };
 }
 
+// UpgradeContext를 가져오는 커스텀 훅.
 export function useUpgradeContext():UpgradeContext {
     const upgradeContext = useContext(UpgradeContext);
     if(!upgradeContext) {
@@ -119,6 +126,7 @@ export function useUpgradeContext():UpgradeContext {
     return upgradeContext;
 }
 
+// Guest(미로그인 상태) 전용 localStorage에서 값 가져오기 함수들.
 function _getGuestGoldPerClickLevel():number {
     const result = window.localStorage.getItem(GUEST_GOLD_PER_CLICK_LEVEL_KEY);
     return result ? Number(result) : 0;
