@@ -4,7 +4,7 @@ import "../css/Menu.css";
 import "../css/ShopMenu.css";
 import "../css/HamburgerButtonMenu.css";
 import "../css/blackbg.css";
-import { Shop } from "./Shop";
+import { ShopMenu } from "./ShopMenu";
 import { HamburgerButtonMenu } from "./HamburgerButtonMenu";
 import clsx from "clsx";
 import type { Nullable } from "../types";
@@ -21,10 +21,10 @@ enum _MenuAppearState {
     GONE
 }
 
-export type ChildMenuProps = { isActivate:boolean };
+export type ChildMenuProps = { isActivate: boolean };
 
-type MenuProps = { isActivate:boolean, menuTypeRef:React.RefObject<Nullable<MenuType>> };
-export function Menu({ isActivate, menuTypeRef }:MenuProps):JSX.Element {
+type MenuProps = { isActivate: boolean, menuTypeRef: React.RefObject<Nullable<MenuType>> };
+export function Menu({ isActivate, menuTypeRef }: MenuProps): JSX.Element {
     const { appearState } = useMenu(isActivate);
     const { classes, blackBGClasses } = getClasses(appearState, menuTypeRef);
     const menuChild = getMenuContents(menuTypeRef.current, isActivate);
@@ -40,25 +40,25 @@ export function Menu({ isActivate, menuTypeRef }:MenuProps):JSX.Element {
 }
 
 const _APPEAR_OR_DISAPPEAR_DURATION = 200; // millisecond
-function useMenu(isActivate:boolean) {
+function useMenu(isActivate: boolean) {
     const appearStateRef = useRef<_MenuAppearState>(_MenuAppearState.GONE);
 
     const _appearedRef = useRef(false);
     const _disappearedRef = useRef(true);
 
-    if(_disappearedRef.current && isActivate) {
+    if (_disappearedRef.current && isActivate) {
         _appearedRef.current = false;
         _disappearedRef.current = false;
     }
 
-    if(_disappearedRef.current) {
+    if (_disappearedRef.current) {
         appearStateRef.current = _MenuAppearState.GONE;
     }
-    else if(!_appearedRef.current) {
+    else if (!_appearedRef.current) {
         _appearedRef.current = true;
         appearStateRef.current = _MenuAppearState.APPEAR;
     }
-    else if(!isActivate) {
+    else if (!isActivate) {
         _disappearedRef.current = true;
         appearStateRef.current = _MenuAppearState.DISAPPEAR;
     }
@@ -77,23 +77,23 @@ const MENU_DISAPPEARED_CLASS = "menu-disappeared";
 const BLACK_BG_APPEARED_CLASS = "black-bg-appeared";
 const BLACK_BG_NORMAL_CLASS = "black-bg-normal";
 const BLACK_BG_DISAPPEARED_CLASS = "black-bg-disappeared";
-function getClasses(appearState:_MenuAppearState, menuTypeRef:React.RefObject<Nullable<MenuType>>) {
+function getClasses(appearState: _MenuAppearState, menuTypeRef: React.RefObject<Nullable<MenuType>>) {
     const [classes, setClasses] = useState("");
     const [blackBGClasses, setBlackBGClasses] = useState("");
 
     const _prevStateRef = useRef<_MenuAppearState>(_MenuAppearState.GONE);
     const _timerRef = useRef<number | null>(null);
 
-    if(_prevStateRef.current === appearState) {
+    if (_prevStateRef.current === appearState) {
         return {
             classes,
             blackBGClasses
         };
     }
 
-    switch(appearState) {
+    switch (appearState) {
         case _MenuAppearState.APPEAR:
-            if(_timerRef.current !== null) {
+            if (_timerRef.current !== null) {
                 clearTimeout(_timerRef.current);
             }
 
@@ -106,7 +106,7 @@ function getClasses(appearState:_MenuAppearState, menuTypeRef:React.RefObject<Nu
             }, _APPEAR_OR_DISAPPEAR_DURATION);
             break;
         case _MenuAppearState.DISAPPEAR:
-            if(_timerRef.current !== null) {
+            if (_timerRef.current !== null) {
                 clearTimeout(_timerRef.current);
             }
 
@@ -131,8 +131,8 @@ function getClasses(appearState:_MenuAppearState, menuTypeRef:React.RefObject<Nu
 }
 
 // Fragment로 묶어 내보냅니다.(<></> 또는 <React.Fragment></React.Fragment>)
-function getMenuContents(menuType:Nullable<MenuType>, isActivate:boolean):JSX.Element {
-    switch(menuType) {
+function getMenuContents(menuType: Nullable<MenuType>, isActivate: boolean): JSX.Element {
+    switch (menuType) {
         case MenuType.HAMBURGER_BUTTON_MENU:
             return (
                 <>
@@ -142,7 +142,7 @@ function getMenuContents(menuType:Nullable<MenuType>, isActivate:boolean):JSX.El
         case MenuType.SHOP_MENU:
             return (
                 <>
-                    <Shop isActivate={isActivate} />
+                    <ShopMenu isActivate={isActivate} />
                 </>
             );
         case null:

@@ -1,10 +1,13 @@
+/* HamburgerButtonMenu에 대해 스타일 지정. */
 .hamburger-button-menu {
     padding: 25px;
 
+    /* HamburgerButtonMenu 안 모든 p 요소에 대해 아래 margin: 10px 적용. */
     & p {
         margin-bottom: 10px;
     }
 
+    /* BetweenHr.css의 .between 스타일 재정의. */
     & .between{
         border: 1px solid black;
     }

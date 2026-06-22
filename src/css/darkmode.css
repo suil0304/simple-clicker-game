@@ -1,17 +1,22 @@
+/* invert 적용을 위해서 모든 요소는 기본 배경이 필요합니다. */
 body,
 body * {
     background-color: white;
     color: black;
 }
 
+/* 딸깍 다크모드 적용 스타일. */
 body:has(.dark-mode) {
+    /* 아주 살짝 안 어둡도록 조절. */
     filter: invert(0.95);
 
-    &.no-dark-mode {
+    /* 다크모드를 적용하면 안 되는 요소에 대하여 다시 한 번 뒤집기. */
+    & .no-dark-mode {
         filter: invert(0.95);
     }
 }
 
+/* 그 트리거가 되는 DarkMode 요소에 대해서는 display: none 적용. */
 #dark-mode-trigger {
     display: none;
 }

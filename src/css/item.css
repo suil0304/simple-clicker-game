@@ -1,7 +1,9 @@
+/* absolute 적용을 위한 부모 relative 적용 앵커. */
 .absolute-anchor {
     position: relative;
 }
 
+/* 부모에 absolute-anchor 클래스가 있을 시 적용 가능한 position: absolute 기반 가운데 정렬 스타일. */
 .align-center-by-absolute {
     position: absolute;
     top: 50%;
@@ -9,12 +11,14 @@
     transform: translate(-50%, -50%);
 }
 
+/* 자식을 완전 가운데 정렬시키는 스타일. */
 .align-center-child-by-flex {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* box-sizing을 border-box로 설정하는 스타일. */
 .border-box-sizing {
     box-sizing: border-box;
 }

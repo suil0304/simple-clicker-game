@@ -27,6 +27,7 @@
         margin-top: 0px;
     }
 
+    /* 상태 분리 - appear 및 normal 클래스에 대해서는 원래 자리(화면 안) 복귀. */
     &.menu-appeared,
     &.menu-normal {
         visibility: visible;
@@ -34,6 +35,7 @@
         transform: translateX(0%);
     }
 
+    /* 사라지는 애니메이션 구현. */
     &.menu-disappeared {
         visibility: visible;
 
@@ -41,6 +43,7 @@
     }
 }
 
+/* 애니메이션 적용 중인, 또는 메뉴가 열린 상태의 Menu를 html 또는 body가 보유 시 y 넘침 숨기기. */
 html,
 body {
     &:has(.menu-component.menu-appeared),

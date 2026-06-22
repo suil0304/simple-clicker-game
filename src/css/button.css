@@ -1,3 +1,5 @@
+/* 버튼 역할을 하는 요소들에 대해 스타일 적용. */
+/* 그 중에서도 마우스 모양 변경. */
 .button-like {
     cursor: default;
 
@@ -7,6 +9,7 @@
     }
 }
 
+/* 비활성화 시 디자인 적용 버튼 스타일. */
 .disable-colored-button {
     &:disabled {
         background-color: rgb(202, 202, 202);
@@ -14,6 +17,7 @@
     }
 }
 
+/* !important를 붙여 강제적으로 비활성화 상태를 설정하는 스타일. */
 .disable-colored-button-force {
     &:disabled {
         background-color: rgb(202, 202, 202) !important;
@@ -21,11 +25,14 @@
     }
 }
 
+/* 애니메이션 분리. */
 .active-scale-bump-button {
+    /* 기본값. */
     transform: scale(1, 1);
 
     transition: all ease-in 0.05s;
 
+    /* 비활성화되지 않은 버튼 중 클릭 시 애니메이션 설정. */
     &:active:not(:disabled) {
         transform: scale(1.1, 1.1);
     }

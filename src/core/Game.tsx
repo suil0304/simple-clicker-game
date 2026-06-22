@@ -185,6 +185,7 @@ function _useGame() {
             statsContext.gold += statsContext.goldPerSecond;
         }
         catch {
+            dataContext.reset();
             console.error("싱크 실패");
         }
     }, [statsContext, dataContext]);

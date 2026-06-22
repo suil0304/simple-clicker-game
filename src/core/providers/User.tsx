@@ -4,8 +4,10 @@ import type { RegisterOrLoginData } from "../../apis/types/auth";
 import type { Nullable } from "../../types";
 import { useAsyncEffect } from "../../hooks/useAsyncEffect";
 
+// 상수로 JWT이 담기는 localStorage 키 설정.
 export const JWT_KEY = "jwt";
 
+// UserContext는 이래야 한다는 interface 규약.
 export interface UserContext {
     readonly name?:string;
     nickname?:Nullable<string>;
@@ -19,6 +21,8 @@ export interface UserContext {
 }
 const UserContext = createContext<UserContext | null>(null);
 
+// UserContext 제공자.
+// UserContext는 유저 이름 및 닉네임 등과 로그인, 로그아웃 등 함수를 보유합니다.
 export function User(props:PropsWithChildren):JSX.Element {
     const {
         nameRef,

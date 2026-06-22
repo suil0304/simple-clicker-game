@@ -1,3 +1,4 @@
+/* MenuButton을 담는 컨테이너. */
 #button-container {
     display: flex;
     position: fixed;
@@ -5,44 +6,57 @@
     flex-direction: column;
 
     width: 60px;
+    /* 높이는 content에 딱 맞게 자동 조절. */
     height: fit-content;
 
     background-color: rgba(0, 0, 0, 0);
 
     top: 20px;
+    /* 뷰포트 기준 0.25vw만큼 오른쪽으로 붙이기. */
     right: 0.25vw;
 
+    /* 가장 위에 있도록 z 인덱스 조절. */
     z-index: 2000;
 
+    /* 그 바로 아래의 div(메뉴 토글 버튼 등)에 대하여 스타일 적용. */
     & > div {
         margin: 13px 0px;
         transition: all ease-out 0.25s;
     }
     
+    /* 바로 아래의 가장 첫 번째 자식에 대해 윗쪽 margin: 0px 적용. */
     & > :first-child {
         margin-top: 0px;
     }
 
+    /* 바로 아래의 가장 마지막 자식에 대해 아래쪽 margin: 0px 적용. */
     & > :last-child {
         margin-bottom: 0px;
     }
 
+
+    /* 활성화된(열린) 버튼 보유 시 바로 아래의 모든 div(메뉴 토글 버튼 등)에 대하여 모든 margin: 0px 적용. */
     &:has(*.button-activated) > div {
         margin: 0px;
     }
 
+    /* 활성화된(열린) 버튼 보유 시 바로 아래의 모든 div(메뉴 토글 버튼 등) 중 활성화되지 않은 버튼에 대하여 스타일 적용. */
     &:has(*.button-activated) > :not(.button-activated) {
+        /* 마우스 클릭으로 발생하는 모든 이벤트 발동 막기. */
         pointer-events: none;
 
+        /* 활성화된(열린) 버튼과 버튼 사이가 아닌 요소(활성화된(열린) 버튼이 포함되지 않은 위의 버튼들)에 대하여 쪼그라들며 위로 올라가는 듯한 애니메이션 적용. */
         &:not(div.button-activated ~ div) {
             height: 0px;
             margin: 0px;
             opacity: 0;
+            /* 숨기기. */
             visibility: hidden;
             transform: translateY(-50px);
         }
     }
 
+    /* 활성화된(열린) 버튼과 버튼 사이 요소에 대하여 오른쪽으로 움직이는(숨기는) 애니메이션 적용. */
     &:has(*.button-activated) > div.button-activated ~ div {
         opacity: 0;
         transform: translateX(150%);

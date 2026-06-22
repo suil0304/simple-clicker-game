@@ -1,3 +1,4 @@
+/* a 요소에 대해 꾸밈을 없애는 클래스. */
 .no-a-decoration {
     &:link {
         color: black;

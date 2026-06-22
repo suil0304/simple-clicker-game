@@ -1,16 +1,23 @@
+/* 검은 배경 스타일. */
 .black-bg {
     visibility: hidden;
+    /* 고정 좌표. */
     position: fixed;
 
+    /* 위와 왼쪽으로 붙이기. */
     top: 0px;
     left: 0px;
 
+    /* 뷰포트 기준 꽉 채우기. */
     width: 100vw;
     height: 100vh;
 
     background-color: black;
+    /* 맨 처음 -> 투명 */
     opacity: 0;
 
+    /* 상태 적용 가능. */
+    /* .black-bg-appeared와 .black-bg-normal에 대하여 등장 애니메이션 적용. */
     &.black-bg-appeared,
     &.black-bg-normal {
         visibility: visible;
@@ -18,6 +25,7 @@
         opacity: 0.6;
     }
 
+    /* .black-bg-disappeared에 대하여 숨김 애니메이션 적용. */
     &.black-bg-disappeared {
         visibility: visible;
 
@@ -25,7 +33,7 @@
     }
 }
 
+/* 부드러운 애니메이션을 원하는 경우. */
 .black-bg-with-animation {
     transition: all ease-out 0.25s;
-    
 }

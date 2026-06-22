@@ -1,8 +1,11 @@
+/* HamburgerButton 스타일 지정. */
 #hamburger-button-component {
     display: flex;
 
     flex-direction: column;
+    /* 축 방향으로 요소 띄워 배치. */
     justify-content: space-between;
+    /* 축 방향으로 오른쪽 왼쪽 가운데 정렬. */
     align-items: center;
     
     background-color: rgba(0, 0, 0, 0);
@@ -17,9 +20,12 @@
     width: 100%;
     height: 17%;
 
+    /* 애니메이션 선형으로 적용(0.2s) */
     transition: all linear 0.2s;
 }
 
+/* 활성화된(열린) 버튼에 대한 X 표시 애니메이션. */
+/* 아래 transform: translate~()로 설정했을 때 보기 좋았습니다. */
 #hamburger-button-component.button-activated {
     & > #hamburger-left-close-bar {
         transform: translateY(250%) rotateZ(45deg);

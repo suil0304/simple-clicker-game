@@ -9,14 +9,16 @@ import { API } from "../apis";
 import { isLogin } from "../core/providers/User";
 import type { ChildMenuProps } from "./Menu";
 
-export function Shop(props:ChildMenuProps): JSX.Element {
+// 상점 메뉴 컴포넌트.
+export function ShopMenu(props:ChildMenuProps): JSX.Element {
     const {
         game,
         upgradeItems,
         setUpgradeItems,
         isDestroyRef
-    } = useShop(props.isActivate);
+    } = useShopMenu(props.isActivate);
 
+    // 서버에서 받아온 upgradeInfo를 ShopItemLine에 넘겨 생성합니다.
     const shopItemLines: JSX.Element[] = upgradeItems.map((upgradeItem) => {
         return (
             <ShopItemLine
@@ -36,7 +38,7 @@ export function Shop(props:ChildMenuProps): JSX.Element {
     );
 }
 
-function useShop(isActivate:boolean) {
+function useShopMenu(isActivate:boolean) {
     const game = useGameContext();
     const statsContext = game.statsContext;
     const upgradeContext = game.upgradeContext;
@@ -45,8 +47,10 @@ function useShop(isActivate:boolean) {
 
     const prevGoldRef = useRef(statsContext.gold);
 
+    // 해당 컴포넌트가 박살난 경우 체크.
     const isDestroyRef = useRef(false);
 
+    // upgradeInfo에 대하여 새로 고침 함수 정의.
     const refresh = useCallback(async () => {
         if (isLogin()) {
             const result = await API.UpgradesAPI.getAll();
@@ -61,12 +65,17 @@ function useShop(isActivate:boolean) {
         setUpgradeItems(result);
     }, [game, statsContext, isActivate]);
 
+    // 비동기 함수에 대하여 처리해주는 커스텀 훅을 사용합니다.
     useAsyncEffect(refresh, [refresh]);
 
+    // 본래 onUpdate를 배열이나 Map으로 만들고 등록하는 방식으로 만들었어야 했으나,
+    // 시간이 부족하여 구현하지 못 하였습니다.
+    // -> 따로 도는 1초 업데이트.
     useEffect(() => {
         isDestroyRef.current = false;
 
         const intervalID = setInterval(() => {
+            // 박살났으면 업데이트 금지.
             if(isDestroyRef.current) {
                 return;
             }
@@ -82,6 +91,7 @@ function useShop(isActivate:boolean) {
 
         return () => {
             isDestroyRef.current = true;
+            // cleanup으로 비우기.
             clearInterval(intervalID);
         }
     }, [refresh]);
@@ -100,6 +110,8 @@ type ShopItemLineProps = {
     upgradeInfo: UpgradeInfo,
     isDestroyRef: RefObject<boolean>
 };
+// 코드 중복을 줄이기 위해 정의하였습니다.
+// upgradeInfo를 받아 배치합니다.
 function ShopItemLine({ game, setUpgradeItems, upgradeInfo, isDestroyRef }: ShopItemLineProps): JSX.Element {
     const {
         onClick
@@ -135,6 +147,8 @@ function setShopItemLine(
 ) {
     const statsContext = game.statsContext;
 
+    // 클릭 시 -> 게스트인 경우 계산 요청 보내고 그에 따라 업데이트.
+    // 클릭 시 -> 게스트가 아닌 경우 구매 요청을 보내고 서버 정보를 받아 업데이트.
     const onClick = () => {
         const doClick = async () => {
             if (isLogin()) {

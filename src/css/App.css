@@ -1,13 +1,18 @@
+/* 가장 기본이 되는 App의 스타일 지정. */
+/* 기본적으로 html과 body의 넘치는 요소 숨기기. */
 html,
 body {
     overflow: hidden
 }
 
+/* 기본적으로 body에는 margin 없음. */
 body {
     margin: 0px;
 }
 
+/* #root 요소 기본 스타일 지정. */
 #root {
+    /* 뷰포트 기준으로 꽉 채우기. */
     width: 100vw;
     height: 100vh;
 

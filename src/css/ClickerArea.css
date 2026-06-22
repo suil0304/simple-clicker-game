@@ -15,6 +15,7 @@
     box-sizing: border-box;
 }
 
+/* ClickerArea의 클릭 가능한 구역 속 텍스트 스타일 지정. */
 #clicker-area-text {
     font-size: 22px;
     color: rgba(0, 0, 0, 0.3);
@@ -22,18 +23,23 @@
     transition: all ease-in 0.05s;
 }
 
+/* 마우스로 가져다 대었을 때(:hover): 크기 키우기. */
 #clicker-area:hover > #clicker-area-text {
     font-size: 26px;
 }
 
+/* 클릭 시 크기 다시 돌려 놓기. */
+#clicker-area:active > #clicker-area-text {
+    font-size: 22px;
+}
+
+/* 초 당 골드 활성화 시 1초마다 눌리는 느낌을 줍니다. */
 #clicker-area.is-active > #clicker-area-text {
     font-size: 18px;
 }
 
+/* :hover만 하고 클릭은 안 했을 때 적용되는 스타일. */
+/* 그 중에서도 활성화가 되었을 때로 한정합니다. */
 #clicker-area.is-active:hover > #clicker-area-text {
-    font-size: 22px;
-}
-
-#clicker-area:active > #clicker-area-text {
     font-size: 22px;
 }

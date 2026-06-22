@@ -55,7 +55,9 @@ export function UserPage():JSX.Element {
                 </button> */}
             </div>
             <div id="user-page-shortcut-container">
+                {/* 출처: https://www.flaticon.com/kr/free-icon/stats_1421366 */}
                 <ShortcutLine src={statsIcon} href="user/stats" text="통계" />
+                {/* https://www.flaticon.com/kr/free-icon/settings-cog_70314?term=%EC%84%A4%EC%A0%95&page=1&position=2&origin=tag&related_id=70314 */}
                 <ShortcutLine src={settingIcon} href="user/settings" text="설정" />
             </div>
             {/* 시간이 없어 계정 삭제는 미구현입니다. */}

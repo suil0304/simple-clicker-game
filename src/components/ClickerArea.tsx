@@ -11,6 +11,7 @@ import clsx from "clsx";
 
 const _DEFAULT_CLICKER_AREA_CLASSES = "align-center-child-by-flex interactive-border-black round-border button-like";
 
+// 클릭 영역과 골드를 담는 함수.
 export function ClickerArea():JSX.Element {
     const { gold, clickerAreaText, clickerAreaClass, handleMouseDown } = useClickerArea();
 
@@ -35,6 +36,7 @@ function useClickerArea() {
     const statsContext = game.statsContext;
     const dataContext = game.dataContext;
 
+    // RefObject는 값을 변경해도 React가 알아채지 못 하기 때문에 ClickerArea에서는 State를 함께 사용합니다.
     const [gold, setGold] = useState(statsContext.gold);
 
     const [clickerAreaText, setClickerAreaText] = useState(_DEFAULT_CLICKER_AREA_TEXT);
@@ -42,6 +44,7 @@ function useClickerArea() {
 
     const clickTimerRef = useRef<number | null>(null);
 
+    // 크리티컬 등은 기본적으로 클라이언트가 계산 후 서버가 검증하여 적용합니다.
     const handleMouseDown = useCallback((event:React.MouseEvent) => {
         HandlerUtil.preventDefaultMultipleClick(event);
 
@@ -58,10 +61,12 @@ function useClickerArea() {
         }
 
         dataContext.totalClickAddGold += Math.floor(add);
+        // 요인 등.
         dataContext.clickDatas.push({
             isCritical: isCritical
         });
 
+        // 변경 값을 설정하여 화면 업데이트를 수행합니다.
         setGold((prev) => prev + add);
         statsContext.gold += add;
         setClickerAreaText(text);
@@ -77,6 +82,7 @@ function useClickerArea() {
     }, [statsContext, dataContext]);
 
 
+    // 초 당 골드를 해금했을 때, 클라이언트 애니메이션 설정.
     const onUpdate = useCallback((_:number) => {
         setGold(statsContext.gold);
 
@@ -94,6 +100,7 @@ function useClickerArea() {
         }
     }, [statsContext]);
 
+    // useEffect로 안전하게 onUpdate를 설정 및 cleanup으로 초기화합니다.
     useEffect(() => {
         game.onUpdate = onUpdate;
 
@@ -102,6 +109,7 @@ function useClickerArea() {
         };
     }, [game]);
 
+    // clsx로 is-activate를 조건에 따라 넣기.
     const clickerAreaClass = clsx(_DEFAULT_CLICKER_AREA_CLASSES, {
         "is-active": _clickerAreaActive
     });
